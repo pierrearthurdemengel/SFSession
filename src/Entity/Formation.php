@@ -63,4 +63,9 @@ class Formation
 
         return $this;
     }
+
+    public function __toString()
+    {
+        return $this->nomFormation." Date de début : ".$this->dateDebut->format('Y-m-d'). " Date de fin : ".$this->dateFin->format('Y-m-d');
+    }
 }
