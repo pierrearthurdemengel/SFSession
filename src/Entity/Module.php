@@ -47,4 +47,9 @@ class Module
 
         return $this;
     }
+
+    public function __toString()
+    {
+        return $this->nomModule." : ".$this->detail;
+    }
 }
