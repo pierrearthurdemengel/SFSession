@@ -1,9 +1,11 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Liste des FormateurController!{% endblock %}
+{% block title %}Liste des formateurs !{% endblock %}
 
 {% block body %}
 
-
+    {% for formateur in formateurs %}
+        {{ formateur }}<br>
+    {% endfor %}
 
 {% endblock %}

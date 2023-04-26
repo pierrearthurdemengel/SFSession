@@ -63,4 +63,9 @@ class Session
 
         return $this;
     }
+
+    public function __toString()
+    {
+        return "La session ". $this->id." a lieu du " .$this->dateDebut->format('Y-m-d')." au ".$this->dateFin->format('Y-m-d'). " nombre de places : ".$this->nombrePlaces;
+    }
 }
