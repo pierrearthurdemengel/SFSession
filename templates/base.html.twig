@@ -14,6 +14,19 @@
         {% endblock %}
     </head>
     <body>
+
+            <nav>
+            <ul>
+                {# <li><a href="{{ path('app_a/d/m/i/n' ) }}  ">liste des ADMINs</a></li> #}
+                <li><a href="{{ path('app_categorie' ) }}  ">liste des categories</a></li>
+                <li><a href="{{ path('app_formateur' ) }}  ">liste des formateurs</a></li>
+                <li><a href="{{ path('app_formation' ) }}  ">liste des formations</a></li>
+                <li><a href="{{ path('app_module' ) }}  ">liste des modules</a></li>
+                <li><a href="{{ path('app_session' ) }}  ">liste des sessions</a></li>
+                <li><a href="{{ path('app_stagiaire' ) }}  ">liste des stagiaires</a></li>
+            </ul>
+            </nav>
+
         {% block body %}{% endblock %}
     </body>
 </html>
