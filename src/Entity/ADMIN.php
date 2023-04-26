@@ -47,4 +47,10 @@ class ADMIN
 
         return $this;
     }
+
+    public function __toString()
+    {
+        return $this->email." ".$this->password;
+    }
+    
 }
