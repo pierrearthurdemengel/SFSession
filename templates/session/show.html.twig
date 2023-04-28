@@ -1,0 +1,30 @@
+
+{% extends 'base.html.twig' %}
+
+{% block title %} Détail d'une session {% endblock %}
+
+{% block body %}
+
+<h1> {{ session }} <h1>
+<p>
+        Date de début : {{ session.dateDebut | date('d/m/Y')}}                 <br>
+        Date de fin : {{ session.dateFin | date('d/m/Y') }} <br>
+        Nombre de places : {{ session.nombrePlaces }} <br>
+<p>
+
+<h2>Liste des stagiaires</h2>
+
+{% if stagiaire.id | lenght == 0 %}
+        <p> Il n'y a pas d'stagiaires </p>
+
+
+{% else %}
+
+        {% for stagiaire in stagiaire.nom ~ stagiaire.prenom %}
+            <a href="{{ path('show_stagiaire', { 'id': stagiaire.id})}}">  {{ stagiaire }} </a> <br>
+        {% endfor %}
+
+{% endif %}
+
+
+{% endblock %}

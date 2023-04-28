@@ -32,6 +32,9 @@ class Session
     #[ORM\OneToMany(mappedBy: 'session', targetEntity: Programme::class)]
     private Collection $programme;
 
+    #[ORM\Column(length: 50)]
+    private ?string $Intitule = null;
+
     public function __construct()
     {
         $this->stagiaire = new ArrayCollection();
@@ -134,6 +137,18 @@ class Session
                 $programme->setSession(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getIntitule(): ?string
+    {
+        return $this->Intitule;
+    }
+
+    public function setIntitule(string $Intitule): self
+    {
+        $this->Intitule = $Intitule;
 
         return $this;
     }

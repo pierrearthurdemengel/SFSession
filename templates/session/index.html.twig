@@ -4,6 +4,21 @@
 
 {% block body %}
 
+    <h1> Liste des sessions </h1>    
+
+               <a class="btn btn-primary" href="{{ path( 'add_session') }}" >Ajouter une session</a><br>
+ 
+ 
+        {% for session in sessions %}
+
+               <a href="{{ path( 'show_session', {'id': session.id}) }}" >{{ session }}</a><br>
+               <a class="btn-warning" btnhref="{{ path( 'edit_session', {'id': session.id}) }}" > Edit </a><br>
+               <a class="btn-danger" btnhref="{{ path( 'delete_session', {'id': session.id}) }}" > Delete </a><br>
+               
+
+        {% endfor %}
+
+
     {% for session in sessions %}
         {{ session }}<br>
     {% endfor %}
