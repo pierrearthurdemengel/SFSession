@@ -25,6 +25,8 @@ class SessionController extends AbstractController
         ]);
     }
 
+    #[Route('/session/add', name: 'add_session')]
+    #[Route('/session/{id}/edit', name: 'edit_session')]
     public function add(ManagerRegistry $doctrine, Session $session = null, Request $request): Response 
 {
     // Si l'Session n'existe pas
