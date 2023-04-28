@@ -1,0 +1,30 @@
+
+{% extends 'base.html.twig' %}
+
+{% block title %} Détail d'un Module {% endblock %}
+
+{% block body %}
+
+<h1> {{ module }} <h1>
+<p>
+        module : {{ module.nomModule}} <br>
+        Détail : {{ module.detail }} <br>
+
+<p>
+
+<h2>Liste des module</h2>
+
+{% if session.module | length == 0 %}
+        <p> Il n'y a pas de module </p>
+
+
+{% else %}
+
+        {% for module in session.module %}
+            <a href="{{ path('show_module', { 'id': module.id})}}">  {{ module.nomModule }} </a> <br>
+        {% endfor %}
+
+{% endif %}
+
+
+{% endblock %}

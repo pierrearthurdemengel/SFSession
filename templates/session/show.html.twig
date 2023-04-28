@@ -7,21 +7,41 @@
 
 <h1> {{ session }} <h1>
 <p>
-        Date de début : {{ session.dateDebut | date('d/m/Y')}}                 <br>
+        Date de début : {{ session.dateDebut | date('d/m/Y')}}   <br>
         Date de fin : {{ session.dateFin | date('d/m/Y') }} <br>
         Nombre de places : {{ session.nombrePlaces }} <br>
+        Nombre de stagiaires inscrits : {{ session.stagiaire | length }}<br>
+        {% set X = session.nombrePlaces%}
+        {% set Y =  session.stagiaire | length %}
+        {% set Z = X - Y %}
+        Nom de place restante : {{ Z }}
+        Formateur : 
+
 <p>
 
 <h2>Liste des stagiaires</h2>
 
-{% if stagiaire.id | lenght == 0 %}
-        <p> Il n'y a pas d'stagiaires </p>
+{% if session.stagiaire | length == 0 %} 
+        <p> Il n'y a pas d'stagiaires </p> 
 
 
-{% else %}
+ {% else %}
 
-        {% for stagiaire in stagiaire.nom ~ stagiaire.prenom %}
+        {% for stagiaire in session.stagiaire %}
             <a href="{{ path('show_stagiaire', { 'id': stagiaire.id})}}">  {{ stagiaire }} </a> <br>
+        {% endfor %}
+
+        {{ session }}
+            <a href="{{ path('show_session', { 'id': session.id})}}">  {{ session }} </a> <br>
+
+        {% for programme in session.programme %}
+                {% for module in programme.module %}
+                        <a href="{{ path('show_module', { 'id': module.id})}}">  {{ module }} </a> <br>
+                                {% for categorie in module.categorie %}
+                                        <a href="{{ path('show_categorie', { 'id': categorie.id})}}">  {{ categorie }} </a> <br>
+
+                                {% endfor %}
+                {% endfor %}
         {% endfor %}
 
 {% endif %}

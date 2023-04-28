@@ -80,6 +80,7 @@ class SessionController extends AbstractController
 
 public function show(Session $session): Response
 {
+    $sessionId = $session->getId();
     return $this->render('session/show.html.twig', [
             'session' => $session
         ]);

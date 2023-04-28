@@ -1,0 +1,42 @@
+
+{% extends 'base.html.twig' %}
+
+{% block title %} Détail d'un formateur {% endblock %}
+
+{% block body %}
+
+<h1> {{ formateur }} <h1>
+<p>
+        nom  : {{ formateur.nom}}    <br>
+        prenom  : {{ formateur.prenom}}    <br>
+
+<p>
+
+<h2> Liste des formateurs </h2>
+
+{% if formateur | length == 0 %}
+        <p> Il n'y a pas de formateur </p>
+
+
+{% else %}
+
+        {% for formateur in formateur %}
+            <a href="{{ path('show_formateur', { 'id': formateur.id})}}">  {{ formateur }} </a> <br>
+        {% endfor %}
+
+        {% for formation in formation %}
+            <a href="{{ path('show_formation', { 'id': formation.id})}}">  {{ formation }} </a> <br>
+        {% endfor %}
+
+        {% for module in formateur.module %}
+            <a href="{{ path('show_module', { 'id': module.id})}}">  {{ module }} </a> <br>
+        {% endfor %}
+
+        {% for categorie in module.categorie %}
+            <a href="{{ path('show_categorie', { 'id': categorie.id})}}">  {{ categorie }} </a> <br>
+        {% endfor %}
+
+{% endif %}
+
+
+{% endblock %}

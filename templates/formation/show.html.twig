@@ -1,0 +1,39 @@
+
+{% extends 'base.html.twig' %}
+
+{% block title %} Détail d'une formation {% endblock %}
+
+{% block body %}
+
+<h1> {{ formation }} <h1>
+<p>
+        nom de la Formation : {{ formation.nomFormation}}    <br>
+        Date de début : {{ formation.dateCreation | date('d/m/Y') }} <br>
+        Date de fin : {{ formation.dateCreation | date('d/m/Y') }} <br>
+
+<p>
+
+<h2> Liste des formations </h2>
+
+{% if formation | length == 0 %}
+        <p> Il n'y a pas de formation </p>
+
+
+{% else %}
+
+        {% for formation in formation %}
+            <a href="{{ path('show_employe', { 'id': formation.id})}}">  {{ formation }} </a> <br>
+        {% endfor %}
+
+        {% for module in formation.module %}
+            <a href="{{ path('show_module', { 'id': module.id})}}">  {{ module }} </a> <br>
+        {% endfor %}
+
+        {% for categorie in module.categorie %}
+            <a href="{{ path('show_categorie', { 'id': categorie.id})}}">  {{ categorie }} </a> <br>
+        {% endfor %}
+
+{% endif %}
+
+
+{% endblock %}

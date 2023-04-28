@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} Ajouter une Catégorie {% endblock %}
+
+{% block body %}
+    
+    
+        {% if confition %}  
+            <h1> Editter une Catégorie </h1>
+
+
+        {% else %}  
+            <h1> Ajouter une Catégorie </h1>
+
+        {% endif %}
+ 
+ 
+        {% for categorie in categorie %}
+
+               <a href="{{ path( 'show_categorie', {'id': categorie.id}) }}" >{{ categorie }}</a><br>
+
+        {% endfor %}
+
+        {{ form(formAddCategorie) }}
+
+        {% endblock %}

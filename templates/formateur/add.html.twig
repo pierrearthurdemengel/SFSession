@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} Ajouter un Formateur {% endblock %}
+
+{% block body %}
+    
+    
+        {% if confition %}  
+            <h1> Editter un Formateur </h1>
+
+
+        {% else %}  
+            <h1> Ajouter un Formateur </h1>
+
+        {% endif %}
+ 
+ 
+        {% for formateur in formateur %}
+
+               <a href="{{ path( 'show_formateur', {'id': formateur.id}) }}" >{{ formateur }}</a><br>
+
+        {% endfor %}
+
+        {{ form(formAddFormateur) }}
+
+        {% endblock %}

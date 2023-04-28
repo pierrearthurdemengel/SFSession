@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} Ajouter un Module {% endblock %}
+
+{% block body %}
+    
+    
+        {% if confition %}  
+            <h1> Editter un Module </h1>
+
+
+        {% else %}  
+            <h1> Ajouter un Module </h1>
+
+        {% endif %}
+ 
+ 
+        {% for module in modules %}
+
+               <a href="{{ path( 'show_module', {'id': module.id}) }}" >{{ module }}</a><br>
+
+        {% endfor %}
+
+        {{ form(formAddModule) }}
+
+        {% endblock %}
