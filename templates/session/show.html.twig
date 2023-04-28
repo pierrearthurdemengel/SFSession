@@ -15,7 +15,8 @@
         {% set Y =  session.stagiaire | length %}
         {% set Z = X - Y %}
         Nom de place restante : {{ Z }}
-        Formateur : 
+        {# Ne fonctionne pas car pas de connecteur comme stagiaire_session #}
+        Formateur : {{ session.formateur }}
 
 <p>
 
