@@ -1,11 +1,29 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Liste des formateurs !{% endblock %}
+{% block title %}Liste des Formateurs !
+{% endblock %}
 
 {% block body %}
 
-    {% for formateur in formateurs %}
-        {{ formateur }}<br>
-    {% endfor %}
+	<h1>
+		Liste des formateurs
+	</h1>
+
+	<a class="btn btn-primary" href="{{ path( 'add_formateur') }}">Ajouter un formateur</a><br>
+
+
+	{% for formateur in formateurs %}
+
+		<a href="{{ path( 'show_formateur', {'id': formateur.id}) }}">{{ formateur }}</a><br>
+		<a class="btn-warning" href="{{ path( 'edit_formateur', {'id': formateur.id}) }}">
+			Edit
+		</a><br>
+		<a class="btn-danger" href="{{ path( 'delete_formateur', {'id': formateur.id}) }}">
+			Delete
+		</a><br>
+
+
+	{% endfor %}
+
 
 {% endblock %}
