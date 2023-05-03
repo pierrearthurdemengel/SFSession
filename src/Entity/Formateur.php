@@ -19,6 +19,9 @@ class Formateur
     #[ORM\Column(length: 50)]
     private ?string $prenom = null;
 
+    #[ORM\OneToOne(mappedBy: 'formateur', cascade: ['persist', 'remove'])]
+    private ?Session $session = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -51,5 +54,22 @@ class Formateur
     public function __toString()
     {
         return $this->nom." ".$this->prenom; 
+    }
+
+    public function getSession(): ?Session
+    {
+        return $this->session;
+    }
+
+    public function setSession(Session $session): self
+    {
+        // set the owning side of the relation if necessary
+        if ($session->getFormateur() !== $this) {
+            $session->setFormateur($this);
+        }
+
+        $this->session = $session;
+
+        return $this;
     }
 }

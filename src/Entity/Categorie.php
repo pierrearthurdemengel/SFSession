@@ -16,6 +16,9 @@ class Categorie
     #[ORM\Column(length: 50)]
     private ?string $nomCategorie = null;
 
+    #[ORM\ManyToOne(inversedBy: 'categorie')]
+    private ?Session $session = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -36,5 +39,17 @@ class Categorie
     public function __toString()
     {
         return $this->nomCategorie;
+    }
+
+    public function getSession(): ?Session
+    {
+        return $this->session;
+    }
+
+    public function setSession(?Session $session): self
+    {
+        $this->session = $session;
+
+        return $this;
     }
 }

@@ -3,15 +3,17 @@
 namespace App\Controller;
 
 use App\Entity\Session;
-use Doctrine\Persistence\ManagerRegistry;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
+use App\Form\SessionType;
 use App\Entity\Entreprise;
 use App\Form\EntrepriseType;
 use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\Persistence\ManagerRegistry;
+use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\BrowserKit\Response as BrowserKitResponse;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class SessionController extends AbstractController
 {
@@ -24,6 +26,12 @@ class SessionController extends AbstractController
             'sessions' => $sessions
         ]);
     }
+
+
+
+
+
+
 
     #[Route('/session/add', name: 'add_session')]
     #[Route('/session/{id}/edit', name: 'edit_session')]
@@ -38,7 +46,7 @@ class SessionController extends AbstractController
     // analyse de ce qui se passe dans mon form
     $form->handleRequest($request);
 
-    if($form->isSubmited() && $form->isValid()) 
+    if($form->isSubmitted() && $form->isValid()) 
     {
         // récupère les données saisient dans le form et ça les inject (setter), ça les hydrate = donne des valeurs
         $session = $form->getData();
@@ -60,12 +68,19 @@ class SessionController extends AbstractController
 }
 
 
+
+
+
+
+
+
+
     #[Route('/session/{id}/delete', name: 'delete_session')]
 
     public function delete(ManagerRegistry $doctrine, Session $session): Response
 {
-    $entityManger = $doctrine->getManager();
-    $entityManager = remove($session);
+    $entityManager = $doctrine->getManager();
+    $entityManager->remove($session);
     $entityManager->flush();
 
     return $this->redirectToRoute('app_session');
@@ -80,7 +95,7 @@ class SessionController extends AbstractController
 
 public function show(Session $session): Response
 {
-    $sessionId = $session->getId();
+
     return $this->render('session/show.html.twig', [
             'session' => $session
         ]);

@@ -8,6 +8,7 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\Mapping\ManyToMany;
+use Symfony\Component\Form\FormTypeInterface;
 
 #[ORM\Entity(repositoryClass: SessionRepository::class)]
 class Session
@@ -33,12 +34,20 @@ class Session
     private Collection $programme;
 
     #[ORM\Column(length: 50)]
-    private ?string $Intitule = null;
+    private ?string $intitule = null;
+
+    #[ORM\OneToOne(inversedBy: 'session', cascade: ['persist', 'remove'])]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Formateur $formateur = null;
+
+    #[ORM\OneToMany(mappedBy: 'session', targetEntity: Categorie::class)]
+    private Collection $categorie;
 
     public function __construct()
     {
         $this->stagiaire = new ArrayCollection();
         $this->programme = new ArrayCollection();
+        $this->categorie = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -143,12 +152,54 @@ class Session
 
     public function getIntitule(): ?string
     {
-        return $this->Intitule;
+        return $this->intitule;
     }
 
-    public function setIntitule(string $Intitule): self
+    public function setIntitule(string $intitule): self
     {
-        $this->Intitule = $Intitule;
+        $this->intitule = $intitule;
+
+        return $this;
+    }
+
+    public function getFormateur(): ?Formateur
+    {
+        return $this->formateur;
+    }
+
+    public function setFormateur(Formateur $formateur): self
+    {
+        $this->formateur = $formateur;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Categorie>
+     */
+    public function getCategorie(): Collection
+    {
+        return $this->categorie;
+    }
+
+    public function addCategorie(Categorie $categorie): self
+    {
+        if (!$this->categorie->contains($categorie)) {
+            $this->categorie->add($categorie);
+            $categorie->setSession($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCategorie(Categorie $categorie): self
+    {
+        if ($this->categorie->removeElement($categorie)) {
+            // set the owning side to null (unless already changed)
+            if ($categorie->getSession() === $this) {
+                $categorie->setSession(null);
+            }
+        }
 
         return $this;
     }
