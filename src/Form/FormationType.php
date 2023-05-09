@@ -2,29 +2,33 @@
 
 namespace App\Form;
 
-use App\Entity\Module;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class ModuleType extends AbstractType
+class FormationType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('nomModule', TextType::class, [
+            ->add('nomFormation', TextType::class, [
                 'attr' => ['class' => 'form-control']
                 ])
-            ->add('detail', TextType::class, [
+            ->add('dateDebut', DateType::class, [
+                'widget' => 'single_text',
                 'attr' => ['class' => 'form-control']
-                ])
+            ])
+            ->add('dateFin', DateType::class, [
+                'widget' => 'single_text',
+                'attr' => ['class' => 'form-control']
+            ])
         ;
     }
 
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'data_class' => Module::class,
+            // Configure your form options here
         ]);
     }
 }
